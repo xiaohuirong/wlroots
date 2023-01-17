@@ -111,8 +111,6 @@ void wlr_region_transform(pixman_region32_t *dst, const pixman_region32_t *src,
 
 void wlr_region_expand(pixman_region32_t *dst, const pixman_region32_t *src,
 		int distance) {
-	assert(distance >= 0);
-
 	if (distance == 0) {
 		pixman_region32_copy(dst, src);
 		return;
