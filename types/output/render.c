@@ -273,3 +273,18 @@ struct wlr_render_pass *wlr_output_begin_render_pass(struct wlr_output *output,
 	wlr_buffer_unlock(buffer);
 	return pass;
 }
+
+bool output_is_direct_scanout(struct wlr_output *output,
+		struct wlr_buffer *buffer) {
+	if (output->swapchain == NULL) {
+		return true;
+	}
+
+	for (size_t i = 0; i < WLR_SWAPCHAIN_CAP; i++) {
+		if (output->swapchain->slots[i].buffer == buffer) {
+			return false;
+		}
+	}
+
+	return true;
+}
